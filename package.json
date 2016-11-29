@@ -1,6 +1,11 @@
 {
   "name": "2DoBox_Pivot",
   "version": "1.0.0",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline",
+    "build": "webpack",
+    "test": "mocha"
+  },
   "description": "To \"pivot\" in developer parlance, is the enhancement of an existing app.",
   "main": "script.js",
   "directories": {
@@ -13,16 +18,13 @@
     "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
+    "babel-preset-latest": "^6.16.0",
     "mocha": "^3.2.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1"
-  },
-  "scripts": {
-    "start": "webpack-dev-server --hot --inline",
-    "build": "webpack",
-    "test": "mocha"
   },
   "repository": {
     "type": "git",
