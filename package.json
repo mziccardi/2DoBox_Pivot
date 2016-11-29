@@ -1,0 +1,38 @@
+{
+  "name": "2DoBox_Pivot",
+  "version": "1.0.0",
+  "description": "To \"pivot\" in developer parlance, is the enhancement of an existing app.",
+  "main": "script.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha-loader": "^1.0.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "mocha": "^3.2.0",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline",
+    "build": "webpack",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mziccardi/2DoBox_Pivot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mziccardi/2DoBox_Pivot/issues"
+  },
+  "homepage": "https://github.com/mziccardi/2DoBox_Pivot#readme"
+}
