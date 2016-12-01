@@ -12,7 +12,6 @@ function onLoad(){
   toggleButton();
 };
 
-
 function retrieveLocal(){
   if (localStorage.getItem("allideas") === null){
     localStorage.setItem("allideas", JSON.stringify([]))
@@ -47,7 +46,7 @@ function Idea(id, title, body, quality) {
   this.id = parseInt(id);
   this.title = title;
   this.body = body;
-  this.quality = quality || "normal";
+  this.quality = "normal" || quality;
 };
 
 // gives unique id to each created idea//
@@ -89,7 +88,8 @@ function ideaCard(id, title, body, quality) {
     </article>`);
   };
 
-  //takes inputs and turns into idea object, pushes that to storage, also runs the function above to display the newly created/stored idea card//
+  //takes inputs and turns into idea object, pushes that to storage, also runs the function above to display the newly created/stored idea card
+
   function makeNewIdea() {
     var newIdea = new Idea(uniqueId(), getTitle(), getBody(), Idea.quality)
     existingIdeas = getIdeas();
@@ -139,8 +139,6 @@ function ideaCard(id, title, body, quality) {
           allIdeas[i].quality = 'high';
 
         }
-
-
 
       }
     }
