@@ -46,7 +46,7 @@ function Idea(id, title, body, quality) {
   this.id = parseInt(id);
   this.title = title;
   this.body = body;
-  this.quality = "normal" || quality;
+  this.quality = quality || "normal";
 };
 
 // gives unique id to each created idea//
@@ -84,7 +84,7 @@ function ideaCard(id, title, body, quality) {
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
       <button class="upvote"></button>
       <button class="downvote"></button>
-      <p class= "idea-quality ` + Idea.quality +`"><span>Quality:</span> <span class="displayed-quality">` + Idea.quality + `</span> </p>
+      <p class= "idea-quality ` + quality +`"><span>Quality:</span> <span class="displayed-quality">` + quality + `</span> </p>
     </article>`);
   };
 
@@ -92,10 +92,12 @@ function ideaCard(id, title, body, quality) {
 
   function makeNewIdea() {
     var newIdea = new Idea(uniqueId(), getTitle(), getBody(), Idea.quality)
-    existingIdeas = getIdeas();
-    existingIdeas.push(newIdea);
-    localStorage.setItem('allideas', JSON.stringify(existingIdeas));
-    ideaCard(newIdea.id, newIdea.title, newIdea.body, Idea.quality);
+    var existingIdeas = getIdeas();
+     if (existingIdeas) {
+      existingIdeas.push(newIdea)
+     }
+    localStorage.setItem('allideas', JSON.stringify([newIdea]));
+    ideaCard(newIdea.id, newIdea.title, newIdea.body, newIdea.quality);
     clearInputs();
   };
 
@@ -129,17 +131,18 @@ function ideaCard(id, title, body, quality) {
   function upVote() {
     var ideaArticle = $(this).closest('.idea-card');
     // var ideaQuality = ideaArticle.find('.displayed-quality').text();
-    var ideaId = ideaArticle[0].id;
+    var ideaId = +ideaArticle[0].id;
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
-
     for(var i = 0; i < allIdeas.length; i++) {
-      if (ideaId === ideaId) {
+      debugger;
+      if (allIdeas[i].id === ideaId) {
         debugger;
         if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'high';
+          console.log(allIdeas);
 
         }
-
+        console.log('hello')
       }
     }
     // allIdeas.map()
