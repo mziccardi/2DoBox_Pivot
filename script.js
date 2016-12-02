@@ -77,8 +77,7 @@ function clearInputs() {
 
 //takes input data and creates idea card to display, prepends as article to section designated in html//
 function ideaCard(id, title, body, quality) {
-  debugger
-  $('.idea-list').prepend(`
+    $('.idea-list').prepend(`
     <article id="`+ id +`" class="idea-card">
       <h2 class="editable" contenteditable="true">` + title + `</h2>
       <button class="delete-idea"></button>
@@ -130,16 +129,19 @@ function ideaCard(id, title, body, quality) {
   function upVote() {
     var ideaArticle = $(this).closest('.idea-card');
     // var ideaQuality = ideaArticle.find('.displayed-quality').text();
-    var ideaId = ideaArticle[0].id;
+    var ideaId = parseInt(ideaArticle[0].id);
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+    debugger;
 
     for(var i = 0; i < allIdeas.length; i++) {
-      if (ideaId === ideaId) {
-        debugger;
+      if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].quality === 'normal') {
-          allIdeas[i].quality = 'high';
+
+          allIdeas[i].quality = 'high'
+           ideaArticle.find('.idea-quality').text('quality: high');
         }
       }
+      localStorage.setItem("allideas", JSON.stringify(allIdeas));
     }
     // allIdeas.map()
 
