@@ -46,7 +46,7 @@ function Idea(id, title, body, quality) {
   this.id = parseInt(id);
   this.title = title;
   this.body = body;
-  this.quality = "normal" || quality;
+  this.quality = quality || 'normal';
 };
 
 // gives unique id to each created idea//
@@ -77,6 +77,7 @@ function clearInputs() {
 
 //takes input data and creates idea card to display, prepends as article to section designated in html//
 function ideaCard(id, title, body, quality) {
+  debugger
   $('.idea-list').prepend(`
     <article id="`+ id +`" class="idea-card">
       <h2 class="editable" contenteditable="true">` + title + `</h2>
@@ -84,7 +85,7 @@ function ideaCard(id, title, body, quality) {
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
       <button class="upvote"></button>
       <button class="downvote"></button>
-      <p class= "idea-quality ` + Idea.quality +`"><span>Quality:</span> <span class="displayed-quality">` + Idea.quality + `</span> </p>
+      <p class= "idea-quality ` + quality +`"><span>Quality:</span> <span class="displayed-quality">` + quality + `</span> </p>
     </article>`);
   };
 
@@ -95,7 +96,7 @@ function ideaCard(id, title, body, quality) {
     existingIdeas = getIdeas();
     existingIdeas.push(newIdea);
     localStorage.setItem('allideas', JSON.stringify(existingIdeas));
-    ideaCard(newIdea.id, newIdea.title, newIdea.body, Idea.quality);
+    ideaCard(newIdea.id, newIdea.title, newIdea.body, newIdea.quality);
     clearInputs();
   };
 
@@ -137,9 +138,7 @@ function ideaCard(id, title, body, quality) {
         debugger;
         if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'high';
-
         }
-
       }
     }
     // allIdeas.map()
