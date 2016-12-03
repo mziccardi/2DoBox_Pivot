@@ -10,7 +10,6 @@ function onLoad(){
   retrieveLocal();
   displayIdeas();
   toggleButton();
-  debugger;
 };
 
 function retrieveLocal(){
@@ -79,7 +78,7 @@ function clearInputs() {
 
 //takes input data and creates idea card to display, prepends as article to section designated in html//
 function ideaCard(id, title, body, quality) {
-    $('.idea-list').prepend(`
+  $('.idea-list').prepend(`
     <article id="`+ id +`" class="idea-card">
       <h2 class="editable" contenteditable="true">` + title + `</h2>
       <button class="delete-idea"></button>
@@ -141,13 +140,16 @@ function ideaCard(id, title, body, quality) {
         if (allIdeas[i].completed === false) {
           allIdeas[i].completed = true;
         }
+        if (allIdeas[i].completed === true) {
+          allIdeas[i].completed = false;
+        }
       }
+      localStorage.setItem('allideas', JSON.stringify(allIdeas));
     }
-    localStorage.setItem('allideas', JSON.stringify(allIdeas));
   };
 
-
   function upVote() {
+    debugger;
     var ideaArticle = $(this).closest('.idea-card');
     // var ideaQuality = ideaArticle.find('.displayed-quality').text();
     var ideaId = parseInt(ideaArticle[0].id);
@@ -155,53 +157,60 @@ function ideaCard(id, title, body, quality) {
 
     for(var i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
-        if (allIdeas[i].quality === 'normal') {
+        if (allIdeas[i].quality === 'none') {
+          allIdeas[i].quality = 'low'
+          ideaArticle.find('.idea-quality').text('quality: low');
+        }
 
+        else if (allIdeas[i].quality === 'low') {
+          allIdeas[i].quality = 'normal'
+          ideaArticle.find('.idea-quality').text('quality: normal');
+          }
+
+        else if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'high'
-           ideaArticle.find('.idea-quality').text('quality: high');
+          ideaArticle.find('.idea-quality').text('quality: high');
+          }
+
+        else if (allIdeas[i].quality === 'high') {
+          allIdeas[i].quality = 'critical'
+          ideaArticle.find('.idea-quality').text('quality: critical');
         }
       }
-      localStorage.setItem("allideas", JSON.stringify(allIdeas));
+        localStorage.setItem("allideas", JSON.stringify(allIdeas));
+      }
     }
-    // allIdeas.map()
-
-    // var quality = allIdeas[i].quality // now we have the 'quality'
-    // var increaseQuality = {
-    //   'None': 'Low',
-    //   'Low': 'Normal',
-    //   'Normal': 'High',
-    //   'High': 'Critical',
-    //   'Critical': 'Critical'
-    // };
-    //
-    // allIdeas[i].quality = increaseQuality[quality];
-
-
-
-    // @TODO
-    // update the ideas attributes
-    // should update in localStorage
-
-    // needs to render with update change on refresh
-    // []we need to find the task in the Task-List via Id?
-
-    // go into allIdeas, in the array and then pull it out
-    // how do we do that?
-
-    // Each task has an ID so how do we capture that?
-    // map through the allIdeas Array and get the id in order to change
-
-    // the quality (importance)
-    //
-
-  };
 
   function downVote() {
     var ideaArticle = $(this).closest('.idea-card');
-    var ideaQuality = ideaArticle.find('.displayed-quality').text();
-    if (ideaQuality === 'Genius') {ideaArticle.find('.displayed-quality').text('Plausible')};
-    if (ideaQuality === 'Plausible') {ideaArticle.find('.displayed-quality').text('Swill')};
-  };
+    // var ideaQuality = ideaArticle.find('.displayed-quality').text();
+    var ideaId = parseInt(ideaArticle[0].id);
+    var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+
+    for(var i = 0; i < allIdeas.length; i++) {
+      if (allIdeas[i].id === ideaId && allIdeas[i].quality === 'critical') {
+          allIdeas[i].quality = 'high'
+          ideaArticle.find('.idea-quality').text('quality: high');
+        }
+
+        else if (allIdeas[i].quality === 'high') {
+          allIdeas[i].quality = 'normal'
+          ideaArticle.find('.idea-quality').text('quality: normal');
+        }
+
+        else if (allIdeas[i].quality === 'normal') {
+          allIdeas[i].quality = 'low'
+          ideaArticle.find('.idea-quality').text('quality: low');
+        }
+
+        else if (allIdeas[i].quality === 'low') {
+          allIdeas[i].quality = 'none'
+          ideaArticle.find('.idea-quality').text('quality: none');
+        }
+
+        localStorage.setItem("allideas", JSON.stringify(allIdeas));
+      }
+    }
 
   //update storage when stuff is edited/clicked in the dom
   $('.idea-list').on('keyup', '.editable', updateStorage);
