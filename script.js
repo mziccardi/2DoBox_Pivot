@@ -181,6 +181,7 @@ function ideaCard(id, title, body, quality) {
         }
       }
         localStorage.setItem("allideas", JSON.stringify(allIdeas));
+        console.log(localStorage)
       }
     }
 
@@ -191,33 +192,37 @@ function ideaCard(id, title, body, quality) {
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
     for(var i = 0; i < allIdeas.length; i++) {
-      console.log(allIdeas[i].quality)
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].quality === 'critical') {
           allIdeas[i].quality = 'high'
           ideaArticle.find('.idea-quality').text('quality: high');
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
         }
 
-        else if (allIdeas[i].quality === 'high') {
+        if (allIdeas[i].quality === 'high') {
           allIdeas[i].quality = 'normal'
           ideaArticle.find('.idea-quality').text('quality: normal');
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
           }
 
-        else if (allIdeas[i].quality === 'normal') {
+        if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'low'
           ideaArticle.find('.idea-quality').text('quality: low');
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
           }
 
-        else if (allIdeas[i].quality === 'low') {
+        if (allIdeas[i].quality === 'low') {
           allIdeas[i].quality = 'none'
           ideaArticle.find('.idea-quality').text('quality: none');
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
+          }
         }
-      }
         localStorage.setItem("allideas", JSON.stringify(allIdeas));
+        console.log(localStorage)
       }
     }
 
