@@ -104,6 +104,7 @@ function ideaCard(id, title, body, quality) {
   //runs the above functions on click of save//
   $($saveButton).on('click', makeNewIdea);
   $($saveButton).on('click', toggleButton);
+  $($saveButton).on('click', makeCounterZero);
 
 
   //deleting ideas from the display AND ALSO from storage//
@@ -261,6 +262,27 @@ function ideaCard(id, title, body, quality) {
     var searchInput = searchInputWithSpaces.trim();
     search(searchInput);
   });
+
+  function titleCounter(){
+    var len = $('.title-input').val().length
+    $('.input-counter').html(len);
+  }
+  function bodyCounter(){
+    var bodyLen = $('.body-input').val().length
+    $('.body-counter').html(bodyLen);
+  }
+
+  $('.title-input').on('keyup', function(){
+    titleCounter();
+  })
+
+  $('.body-input').on('keyup', function(){
+    bodyCounter();
+  })
+
+  function makeCounterZero() {
+    $('.input-counter, .body-counter').text(0);
+  }
 
   function search(searchInput) {
     if(searchInput !== "") {
