@@ -133,7 +133,6 @@ function ideaCard(id, title, body, quality) {
     var ideaArticle = $(this).closest('.idea-card');
     var ideaId = parseInt(ideaArticle[0].id);
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
-    debugger;
 
     for(var i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
@@ -149,7 +148,6 @@ function ideaCard(id, title, body, quality) {
   };
 
   function upVote() {
-    debugger;
     var ideaArticle = $(this).closest('.idea-card');
     // var ideaQuality = ideaArticle.find('.displayed-quality').text();
     var ideaId = parseInt(ideaArticle[0].id);
@@ -158,22 +156,27 @@ function ideaCard(id, title, body, quality) {
     for(var i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].quality === 'none') {
+          console.log(allIdeas.quality)
           allIdeas[i].quality = 'low'
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: low');
         }
 
         else if (allIdeas[i].quality === 'low') {
           allIdeas[i].quality = 'normal'
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: normal');
           }
 
         else if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'high'
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: high');
           }
 
         else if (allIdeas[i].quality === 'high') {
           allIdeas[i].quality = 'critical'
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: critical');
         }
       }
@@ -188,26 +191,32 @@ function ideaCard(id, title, body, quality) {
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
     for(var i = 0; i < allIdeas.length; i++) {
-      if (allIdeas[i].id === ideaId && allIdeas[i].quality === 'critical') {
+      console.log(allIdeas[i].quality)
+      if (allIdeas[i].id === ideaId) {
+        if (allIdeas[i].quality === 'critical') {
           allIdeas[i].quality = 'high'
           ideaArticle.find('.idea-quality').text('quality: high');
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
         }
 
         else if (allIdeas[i].quality === 'high') {
           allIdeas[i].quality = 'normal'
           ideaArticle.find('.idea-quality').text('quality: normal');
-        }
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          }
 
         else if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'low'
           ideaArticle.find('.idea-quality').text('quality: low');
-        }
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          }
 
         else if (allIdeas[i].quality === 'low') {
           allIdeas[i].quality = 'none'
           ideaArticle.find('.idea-quality').text('quality: none');
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
         }
-
+      }
         localStorage.setItem("allideas", JSON.stringify(allIdeas));
       }
     }
