@@ -10,6 +10,7 @@ function onLoad(){
   retrieveLocal();
   displayIdeas();
   toggleButton();
+  debugger;
 };
 
 function retrieveLocal(){
@@ -42,11 +43,12 @@ $(".body-input").on('keyup', function(){
 });
 
 //constructor defining what an idea is//
-function Idea(id, title, body, quality) {
+function Idea(id, title, body, quality, completed) {
   this.id = parseInt(id);
   this.title = title;
   this.body = body;
   this.quality = quality || 'normal';
+  this.completed = completed || false;
 };
 
 // gives unique id to each created idea//
@@ -84,6 +86,7 @@ function ideaCard(id, title, body, quality) {
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
       <button class="upvote"></button>
       <button class="downvote"></button>
+      <button class="completed"></button>
       <p class= "idea-quality ` + quality +`"><span>Quality:</span> <span class="displayed-quality">` + quality + `</span> </p>
     </article>`);
   };
@@ -124,14 +127,31 @@ function ideaCard(id, title, body, quality) {
 
   //upvote and downvote buttons update quality in display AND in local storage//
   $('.idea-list').on('click', '.upvote', upVote);
-  $('.idea-list').on('click', '.downvote', downVote)
+  $('.idea-list').on('click', '.downvote', downVote);
+  $('.idea-list').on('click', '.completed', completedTask);
+
+  function completedTask() {
+    var ideaArticle = $(this).closest('.idea-card');
+    var ideaId = parseInt(ideaArticle[0].id);
+    var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+    debugger;
+
+    for(var i = 0; i < allIdeas.length; i++) {
+      if (allIdeas[i].id === ideaId) {
+        if (allIdeas[i].completed === false) {
+          allIdeas[i].completed = true;
+        }
+      }
+    }
+    localStorage.setItem('allideas', JSON.stringify(allIdeas));
+  };
+
 
   function upVote() {
     var ideaArticle = $(this).closest('.idea-card');
     // var ideaQuality = ideaArticle.find('.displayed-quality').text();
     var ideaId = parseInt(ideaArticle[0].id);
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
-    debugger;
 
     for(var i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
@@ -158,7 +178,8 @@ function ideaCard(id, title, body, quality) {
 
 
 
-    // @TODO update the ideas attributes
+    // @TODO
+    // update the ideas attributes
     // should update in localStorage
 
     // needs to render with update change on refresh
