@@ -77,10 +77,10 @@ function clearInputs() {
 };
 
 //takes input data and creates idea card to display, prepends as article to section designated in html//
-function ideaCard(id, title, body, quality) {
+function ideaCard(id, title, body, quality, completed) {
   $('.idea-list').prepend(`
     <article id="`+ id +`" class="idea-card">
-      <h2 class="editable" contenteditable="true">` + title + `</h2>
+      <h2 class="editable title " contenteditable="true">` + title + `</h2>
       <button class="delete-idea" aria-label='delete'></button>
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
       <button class="upvote" aria-label='upvote'></button>
@@ -97,7 +97,7 @@ function ideaCard(id, title, body, quality) {
     existingIdeas = getIdeas();
     existingIdeas.push(newIdea);
     localStorage.setItem('allideas', JSON.stringify(existingIdeas));
-    ideaCard(newIdea.id, newIdea.title, newIdea.body, newIdea.quality);
+    ideaCard(newIdea.id, newIdea.title, newIdea.body, newIdea.quality, newIdea.completed);
     clearInputs();
   };
 
@@ -130,26 +130,31 @@ function ideaCard(id, title, body, quality) {
   $('.idea-list').on('click', '.downvote', downVote);
   $('.idea-list').on('click', '.completed', completedTask);
 
+
+
   function completedTask() {
-    debugger
     let ideaArticle = $(this).closest('.idea-card');
     let ideaId = parseInt(ideaArticle[0].id);
     let allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
+
+
     for(let i = 0; i < allIdeas.length; i++) {
+
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].completed === false) {
           allIdeas[i].completed = true;
+          $(ideaArticle).addClass('true')
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           return
         }
         if (allIdeas[i].completed === true) {
           allIdeas[i].completed = false;
+          $(ideaArticle).removeClass('true')
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           return
         }
       }
-      // localStorage.setItem('allideas', JSON.stringify(allIdeas));
     }
   };
 

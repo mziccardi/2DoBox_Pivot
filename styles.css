@@ -1,4 +1,9 @@
-
+body {
+  box-sizing: border-box;
+}
+button{
+  cursor: pointer;
+}
 
 .hero {
   display: flex;
@@ -42,7 +47,9 @@ textarea {
 
 .counter {
   color: white;
+  margin-bottom: 4px;
 }
+
 
 .search-field {
   border: 2px solid #D1D3D4;
@@ -60,7 +67,7 @@ textarea {
 .save {
   background: #00A79D;
   border: none;
-  color: #FFFFFF;
+  color: white;
   font-size: 100%;
   height: 13%;
   margin: auto;
@@ -71,6 +78,7 @@ textarea {
 .save:hover{
   background: #045E55;
 }
+
 
 article {
   width: 60%;
@@ -156,6 +164,16 @@ article {
   bottom: 10%;
   left: 8%;
   z-index: 99;
+}
+
+.completed{
+  position: absolute;
+  bottom: 10%;
+  right: 2%;
+}
+
+.true{
+  opacity:0.25;
 }
 
 .downvote:hover {
