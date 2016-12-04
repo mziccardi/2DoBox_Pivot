@@ -8,7 +8,6 @@ test.describe('testing ideabox', function(){
     const driver = new webdriver.Builder()
     .forBrowser('chrome')
     .build();
-
     driver.get('http://localhost:8080');
 
     const title = driver.findElement({className: 'title-input'})
@@ -24,5 +23,20 @@ test.describe('testing ideabox', function(){
     }).then((value)=>{
       assert.equal(value, 'this is a description')
     })
+  })
+  test.it('should let me save a task', ()=>{
+    const driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .build();
+    driver.get('http://localhost:8080')
+
+    const title = driver.findElement({className:'title-input'})
+    const body = driver.findElement({className:'body-input'})
+    const saveButton = driver.findElement({className:'save'})
+
+    title.sendKeys('MY TITLE')
+    body.sendKeys('MY BODY')
+    saveButton.click()
+    driver.quit()
   })
 })

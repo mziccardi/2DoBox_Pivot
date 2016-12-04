@@ -30,7 +30,7 @@ function displayIdeas(){
 };
 
 function toggleButton (){
-  if ($(".title-input").val().length > 0  || $(".body-input").val().length > 0) {
+  if ($(".title-input").val().length > 0  && $(".body-input").val().length > 0) {
     $saveButton.attr("disabled", false);
   } else {
     $saveButton.attr('disabled', true);
