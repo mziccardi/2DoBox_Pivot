@@ -85,7 +85,7 @@ function ideaCard(id, title, body, quality) {
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
       <button class="upvote"></button>
       <button class="downvote"></button>
-      <button class="completed"></button>
+      <button class="completed">Mark Completed</button>
       <p class= "idea-quality ` + quality +`"><span>Quality:</span> <span class="displayed-quality">` + quality + `</span> </p>
     </article>`);
   };
@@ -131,6 +131,7 @@ function ideaCard(id, title, body, quality) {
   $('.idea-list').on('click', '.completed', completedTask);
 
   function completedTask() {
+    debugger
     var ideaArticle = $(this).closest('.idea-card');
     var ideaId = parseInt(ideaArticle[0].id);
     var allIdeas = JSON.parse(localStorage.getItem("allideas"));
@@ -139,12 +140,16 @@ function ideaCard(id, title, body, quality) {
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].completed === false) {
           allIdeas[i].completed = true;
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
         }
         if (allIdeas[i].completed === true) {
           allIdeas[i].completed = false;
+          localStorage.setItem("allideas", JSON.stringify(allIdeas));
+          return
         }
       }
-      localStorage.setItem('allideas', JSON.stringify(allIdeas));
+      // localStorage.setItem('allideas', JSON.stringify(allIdeas));
     }
   };
 
@@ -161,24 +166,28 @@ function ideaCard(id, title, body, quality) {
           allIdeas[i].quality = 'low'
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: low');
+          return
         }
 
-        else if (allIdeas[i].quality === 'low') {
+         if (allIdeas[i].quality === 'low') {
           allIdeas[i].quality = 'normal'
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: normal');
+          return
           }
 
-        else if (allIdeas[i].quality === 'normal') {
+         if (allIdeas[i].quality === 'normal') {
           allIdeas[i].quality = 'high'
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: high');
+          return
           }
 
-        else if (allIdeas[i].quality === 'high') {
+         if (allIdeas[i].quality === 'high') {
           allIdeas[i].quality = 'critical'
           localStorage.setItem("allideas", JSON.stringify(allIdeas));
           ideaArticle.find('.idea-quality').text('quality: critical');
+          return
         }
       }
         localStorage.setItem("allideas", JSON.stringify(allIdeas));
