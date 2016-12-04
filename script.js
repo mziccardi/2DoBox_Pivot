@@ -81,11 +81,11 @@ function ideaCard(id, title, body, quality) {
   $('.idea-list').prepend(`
     <article id="`+ id +`" class="idea-card">
       <h2 class="editable" contenteditable="true">` + title + `</h2>
-      <button class="delete-idea"></button>
+      <button class="delete-idea" aria-label='delete'></button>
       <p class="editable idea-body" contenteditable="true">` + body + `</p>
-      <button class="upvote"></button>
-      <button class="downvote"></button>
-      <button class="completed">Mark Completed</button>
+      <button class="upvote" aria-label='upvote'></button>
+      <button class="downvote" aria-label='downvote'></button>
+      <button class="completed" aria-label='mark complete'>Mark Completed</button>
       <p class= "idea-quality ` + quality +`"><span>Quality:</span> <span class="displayed-quality">` + quality + `</span> </p>
     </article>`);
   };
