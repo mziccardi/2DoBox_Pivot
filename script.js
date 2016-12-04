@@ -1,6 +1,6 @@
-var $titleInput = $('.title-input');
-var $bodyInput = $('.body-input');
-var $saveButton = $('.save');
+let $titleInput = $('.title-input');
+let $bodyInput = $('.body-input');
+let $saveButton = $('.save');
 
 //onload functions that find any ideas in local storage and display them on the page, and toggles off save butotn when there is no input//
 
@@ -23,7 +23,7 @@ function getIdeas(){
 };
 
 function displayIdeas(){
-  var ideas = getIdeas();
+  let ideas = getIdeas();
   ideas.forEach(function(idea) {
     ideaCard(idea.id, idea.title, idea.body, idea.quality);
   });
@@ -57,17 +57,17 @@ function uniqueId() {
 
 //functions for grabbing the input from the user//
 function getTitle() {
-  var ideaTitle = $titleInput.val();
+  let ideaTitle = $titleInput.val();
   return ideaTitle;
 };
 
 function getBody() {
-  var ideaBody = $bodyInput.val();
+  let ideaBody = $bodyInput.val();
   return ideaBody;
 };
 
 function getSearch() {
-  var searchInput = $('.search-field').val();
+  let searchInput = $('.search-field').val();
   return searchInput;
 };
 
@@ -93,7 +93,7 @@ function ideaCard(id, title, body, quality) {
   //takes inputs and turns into idea object, pushes that to storage, also runs the function above to display the newly created/stored idea card
 
   function makeNewIdea() {
-    var newIdea = new Idea(uniqueId(), getTitle(), getBody(), Idea.quality)
+    let newIdea = new Idea(uniqueId(), getTitle(), getBody(), Idea.quality)
     existingIdeas = getIdeas();
     existingIdeas.push(newIdea);
     localStorage.setItem('allideas', JSON.stringify(existingIdeas));
@@ -111,14 +111,14 @@ function ideaCard(id, title, body, quality) {
   $('.idea-list').on('click', '.delete-idea', deleteIdea);
 
   function deleteIdea() {
-    var ideaArticle = $(this).closest('.idea-card');
-    var idToDeleteFromStorage = parseInt(ideaArticle.attr("id"));
+    let ideaArticle = $(this).closest('.idea-card');
+    let idToDeleteFromStorage = parseInt(ideaArticle.attr("id"));
     deleteIdeaFromStorage(idToDeleteFromStorage);
     ideaArticle.remove();
   };
 
   function deleteIdeaFromStorage(toBeDeleteID) {
-    var existingIdeas = getIdeas();
+    let existingIdeas = getIdeas();
     existingIdeas = existingIdeas.filter(function(idea, index) {
       return idea.id !== parseInt(toBeDeleteID)
     });
@@ -132,11 +132,11 @@ function ideaCard(id, title, body, quality) {
 
   function completedTask() {
     debugger
-    var ideaArticle = $(this).closest('.idea-card');
-    var ideaId = parseInt(ideaArticle[0].id);
-    var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+    let ideaArticle = $(this).closest('.idea-card');
+    let ideaId = parseInt(ideaArticle[0].id);
+    let allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
-    for(var i = 0; i < allIdeas.length; i++) {
+    for(let i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].completed === false) {
           allIdeas[i].completed = true;
@@ -154,12 +154,12 @@ function ideaCard(id, title, body, quality) {
   };
 
   function upVote() {
-    var ideaArticle = $(this).closest('.idea-card');
-    // var ideaQuality = ideaArticle.find('.displayed-quality').text();
-    var ideaId = parseInt(ideaArticle[0].id);
-    var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+    let ideaArticle = $(this).closest('.idea-card');
+    // let ideaQuality = ideaArticle.find('.displayed-quality').text();
+    let ideaId = parseInt(ideaArticle[0].id);
+    let allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
-    for(var i = 0; i < allIdeas.length; i++) {
+    for(let i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].quality === 'none') {
           console.log(allIdeas.quality)
@@ -196,12 +196,12 @@ function ideaCard(id, title, body, quality) {
     }
 
   function downVote() {
-    var ideaArticle = $(this).closest('.idea-card');
-    // var ideaQuality = ideaArticle.find('.displayed-quality').text();
-    var ideaId = parseInt(ideaArticle[0].id);
-    var allIdeas = JSON.parse(localStorage.getItem("allideas"));
+    let ideaArticle = $(this).closest('.idea-card');
+    // let ideaQuality = ideaArticle.find('.displayed-quality').text();
+    let ideaId = parseInt(ideaArticle[0].id);
+    let allIdeas = JSON.parse(localStorage.getItem("allideas"));
 
-    for(var i = 0; i < allIdeas.length; i++) {
+    for(let i = 0; i < allIdeas.length; i++) {
       if (allIdeas[i].id === ideaId) {
         if (allIdeas[i].quality === 'critical') {
           allIdeas[i].quality = 'high'
@@ -243,14 +243,14 @@ function ideaCard(id, title, body, quality) {
 
   //when a user edits an idea in the display, this function pushes those changes to storage//
   function updateStorage() {
-    var editedIdeaArticle = $(this).closest('.idea-card');
-    var editedIdeaId = parseInt(editedIdeaArticle.attr('id'));
-    var editedIdeaTitle = editedIdeaArticle.find('h2.editable').text();
-    var editedIdeaBody = editedIdeaArticle.find('p.editable').text();
-    var editedIdeaQuality = editedIdeaArticle.find('.displayed-quality').text();
+    let editedIdeaArticle = $(this).closest('.idea-card');
+    let editedIdeaId = parseInt(editedIdeaArticle.attr('id'));
+    let editedIdeaTitle = editedIdeaArticle.find('h2.editable').text();
+    let editedIdeaBody = editedIdeaArticle.find('p.editable').text();
+    let editedIdeaQuality = editedIdeaArticle.find('.displayed-quality').text();
     deleteIdeaFromStorage(editedIdeaId);
-    var editedIdea = new Idea(editedIdeaId, editedIdeaTitle, editedIdeaBody, editedIdeaQuality);
-    var existingIdeas = getIdeas();
+    let editedIdea = new Idea(editedIdeaId, editedIdeaTitle, editedIdeaBody, editedIdeaQuality);
+    let existingIdeas = getIdeas();
     existingIdeas.push(editedIdea);
     localStorage.setItem("allideas", JSON.stringify(existingIdeas));
   };
@@ -263,21 +263,21 @@ function ideaCard(id, title, body, quality) {
   });
 
   function getSearchInput() {
-    var searchInput = $('.search-field').val();
+    let searchInput = $('.search-field').val();
     return searchInput;
   };
   $('.search-field').on('keyup', function(){
-    var searchInputWithSpaces = $(this).val();
-    var searchInput = searchInputWithSpaces.trim();
+    let searchInputWithSpaces = $(this).val();
+    let searchInput = searchInputWithSpaces.trim();
     search(searchInput);
   });
 
   function titleCounter(){
-    var len = $('.title-input').val().length
+    let len = $('.title-input').val().length
     $('.input-counter').html(len);
   }
   function bodyCounter(){
-    var bodyLen = $('.body-input').val().length
+    let bodyLen = $('.body-input').val().length
     $('.body-counter').html(bodyLen);
   }
 
