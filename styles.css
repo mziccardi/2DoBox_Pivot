@@ -1,9 +1,19 @@
+body {
+  box-sizing: border-box;
+}
+button{
+  cursor: pointer;
+}
+
 .hero {
-  font-family: 'Roboto Slab', serif;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  height: 300px;
-  background-color: #E5F3F2;
+  flex-wrap: wrap;
+  background-color: blue;
+  padding: 20px;
+
 }
 
 .hero-title {
@@ -18,10 +28,10 @@ textarea {
 }
 
 .teal-h1 {
-  color: #00A79D;
+  color: white;
 }
 .grey-h1 {
-  color: #6D6E71;
+  color: #FEFFE4;
 }
 
 .title-input, .body-input {
@@ -34,6 +44,12 @@ textarea {
   text-indent: 10px;
   line-height: 32px;
 }
+
+.counter {
+  color: white;
+  margin-bottom: 4px;
+}
+
 
 .search-field {
   border: 2px solid #D1D3D4;
@@ -51,7 +67,7 @@ textarea {
 .save {
   background: #00A79D;
   border: none;
-  color: #FFFFFF;
+  color: white;
   font-size: 100%;
   height: 13%;
   margin: auto;
@@ -62,6 +78,7 @@ textarea {
 .save:hover{
   background: #045E55;
 }
+
 
 article {
   width: 60%;
@@ -90,7 +107,7 @@ article {
 }
 
 .editable {
-  color: #939598;
+  color: black;
   display: inline-block;
   outline: 0px solid transparent;
   padding-bottom: 15px;
@@ -98,7 +115,7 @@ article {
 
 .idea-quality {
   font-family: 'Roboto Slab', serif;
-  color: #6D6E71;
+  color: black;
   display: inline-block;
   padding-left: 15px;
 }
@@ -147,6 +164,16 @@ article {
   bottom: 10%;
   left: 8%;
   z-index: 99;
+}
+
+.completed{
+  position: absolute;
+  bottom: 10%;
+  right: 2%;
+}
+
+.true{
+  opacity:0.25;
 }
 
 .downvote:hover {
