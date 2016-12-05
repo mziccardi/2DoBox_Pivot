@@ -39,4 +39,15 @@ test.describe('testing ideabox', function(){
     saveButton.click()
     driver.quit()
   })
+  test.it('should be able to upvote from normal to high',()=>{
+    const driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .build();
+    driver.get('http://localhost:8080')
+    let upvote = driver.findElement({className:'upvote'})
+
+    upvote.click()
+    let importance = driver.findElement({className:'displayed-quality'})
+    assert.equal(importance.getText(),'quality:high')
+  })
 })
